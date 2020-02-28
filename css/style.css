@@ -1,0 +1,71 @@
+.innum {
+    width: 100px;
+}
+.wds{
+    width: 310px;
+    display: inline-block;
+    margin: 15px;
+
+}
+.htect{
+    width: 466px;
+
+}
+.innumm {
+    width: 80px;
+    margin: 0 auto;
+}
+
+.ofl {
+    overflow-x: scroll;
+
+}
+
+.tdm {
+    padding: 0 !important;
+    width: 85px !important;
+
+}
+
+.astrsk {
+    font-size: 130px;
+}
+
+form {
+    display: contents !important;
+}
+
+.pstwtbl {
+    display: inline-block;
+    width: 30%;
+    margin: 10px;
+}
+
+.assmb {
+    max-width: 23%;
+}
+
+.fls {
+    width: 30%;
+    display: inline-block;
+}
+
+.passon {
+    max-width: 13%;
+}
+
+.opcdsp {
+    letter-spacing: 21px;
+
+    padding-left: 15px;
+}
+
+.adrsps {
+    letter-spacing: 26px;
+    padding-left: 11px;
+}
+
+.spcshex {
+    letter-spacing: 30px;
+    padding-left: 12px;
+}
