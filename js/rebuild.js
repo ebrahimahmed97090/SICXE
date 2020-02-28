@@ -362,7 +362,7 @@ function NIFlags(program) {
             } else {
                 flgs[q].x = 0;
             }
-            if (e[2][0] === "#" || (e[2][0] === "@" && !isNaN(e[2].substring(1, e[2].length))) || e[1][0] === "+") {
+            if (((e[2][0] === "#" || e[2][0] === "@") && !isNaN(e[2].substring(1, e[2].length))) || e[1][0] === "+") {
                 flgs[q].b = 0;
                 flgs[q].p = 0;
             } else if ((e[5] - e[3]) >= -2048 && (e[5] - e[3]) <= 2047) {
@@ -437,15 +437,15 @@ function instStrHexToBinary(program) {
         if (programs[7] === "N/I") {
             programs.push("N/I")
         } else {
-            programs.push("");
+
             if (programs[4] === 4 || programs[4] === 3) {
-                programs[9] += (parseInt(programs[7][0], 16).toString(2).padStart(4, "0")) + " " + (parseInt(programs[7][1], 16).toString(2).padStart(4, "0")).substring(0, 2) + " ";
+                programs.push((parseInt(programs[7][0], 16).toString(2).padStart(4, "0")) + " " + (parseInt(programs[7][1], 16).toString(2).padStart(4, "0")).substring(0, 2) + " ");
 
 
             } else if (programs[4] === 2 || programs[4] === 1) {
 
-                programs[9] += (parseInt(programs[7][0], 16).toString(2).padStart(4, "0")) + " " +
-                    (parseInt(programs[7][1], 16).toString(2).padStart(4, "0")) + " ";
+                programs.push((parseInt(programs[7][0], 16).toString(2).padStart(4, "0")) + " " +
+                    (parseInt(programs[7][1], 16).toString(2).padStart(4, "0")) + " ");
 
 
             }
@@ -463,7 +463,6 @@ function fullInstBinary(program) {
             programs.push("");
             if (programs[4] === 4 || programs[4] === 3) {
                 programs[10] += (parseInt(programs[7][0], 16).toString(2).padStart(4, "0")) + " " + (parseInt(programs[7][1], 16).toString(2).padStart(4, "0")).substring(0, 2) + " " + programs[6].n.toString() + programs[6].i.toString();
-
 
             } else if (programs[4] === 2 || programs[4] === 1) {
 
@@ -554,7 +553,9 @@ function obCode(program) {
             if (pro[2].trim().length === 1) {
                 pro.push(pro[7] + reg[1][reg[0].indexOf(pro[2].trim())] + "0")
             } else if (pro[2].trim().length === 3) {
-                pro.push(pro[7] + reg[1][reg[0].indexOf(pro[2][0].trim())] + reg[1][reg[0].indexOf(pro[2][2].trim())])
+                let t = pro[2].trim();
+                pro.push(pro[7] + reg[1][reg[0].indexOf(t[0])] + reg[1][reg[0].indexOf(pro[2][2])])
+                console.log(reg[1][reg[0].indexOf(pro[2][0])])
             }
         }
     })
@@ -603,7 +604,7 @@ function HTME(program) {
     }
     program.forEach((p, index) => {
         if (p[1][0] === "+" && p[2][0] !== "#") {
-            M = ['M', (p[3] + 1).toString(16).padStart(6, "0"), p[11].length.toString().padStart(2,"0")];
+            M = ['M', (p[3] + 1).toString(16).padStart(6, "0"), p[11].length.toString().padStart(2, "0")];
             HTE.splice(z, 0, M);
             z++;
         }
@@ -613,54 +614,116 @@ function HTME(program) {
 
 function printPassTwo(program) {
     for (let i = 0; i < program.length; i++)
-        if (program[i][11] === "N/I") {
-            if (program[i][13] !== "N/O") {
-                $(`<div class="wds"><h5>${i} ${program[i][1]} ${program[i][2]}</h5>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th scope="col" class="text-center">OP Code</th>
-            <th scope="col" class="text-center">X</th>
-            <th scope="col" class="text-center">Address</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td colspan="3" class="text-center">${program[i][13]}</td>
-        </tr>
-        </tbody>
-</div>`).appendTo(".passtw");
-            }
-        } else {
+        if (program[i][1] === "WORD" || program[i][1] === "BYTE" || program[i][4] === 1) {
+
             $(`<div class="wds"><h5>${i} ${program[i][1]} ${program[i][2]}</h5>
     <table class="table table-bordered">
         <thead>
         <tr>
             <th scope="col" class="text-center">OP Code</th>
-            <th scope="col" class="text-center">X</th>
-            <th scope="col" class="text-center">Address</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td class="text-center">${program[i][11]}</td>
-            <td class="text-center">${program[i][5]}</td>
-            <td class="text-center">${program[i][7]}</td>
-        </tr>
-        <tr>
-            <td class="text-center">${program[i][9]}</td>
-            <td class="text-center">${program[i][5]}</td>
-            <td class="text-center">${program[i][8]}</td>
-        </tr>
-        <tr>
-            <td class="text-center">${program[i][11]}</td>
-            <td colspan="2" class="text-center">${program[i][10]}</td>
-        </tr>
-        <tr>
-            <td colspan="3" class="text-center">${program[i][13]}</td>
+            <td colspan="3" class="text-center">${program[i][16]}</td>
         </tr>
         </tbody>
 </div>`).appendTo(".passtw");
+
+        } else if (program[i][4] === 3 || program[i][4] === 4) {
+            $(`<div class="wds"><h5>${i} ${program[i][1]} ${program[i][2]}</h5>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center">OP Code</th>
+            <th scope="col" class="text-center">N</th>
+            <th scope="col" class="text-center">I</th>
+            <th scope="col" class="text-center">X</th>
+            <th scope="col" class="text-center">B</th>
+            <th scope="col" class="text-center">P</th>
+            <th scope="col" class="text-center">E</th>
+            <th scope="col" class="text-center">Displacement</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="text-center">${program[i][7]}</td>
+            <td class="text-center">${program[i][6].n}</td>
+            <td class="text-center">${program[i][6].i}</td>
+            <td class="text-center">${program[i][6].x}</td>
+            <td class="text-center">${program[i][6].b}</td>
+            <td class="text-center">${program[i][6].p}</td>
+            <td class="text-center">${program[i][6].e}</td>
+            <td class="text-center">${program[i][8]}</td>
+        </tr>
+        <tr>
+            <td class="text-center">${program[i][9]}</td>
+            <td class="text-center">${program[i][6].n}</td>
+            <td class="text-center">${program[i][6].i}</td>
+            <td class="text-center">${program[i][6].x}</td>
+            <td class="text-center">${program[i][6].b}</td>
+            <td class="text-center">${program[i][6].p}</td>
+            <td class="text-center">${program[i][6].e}</td>
+            <td class="text-center">${program[i][12]}</td>
+        </tr>
+         <tr>
+            <td class="text-center " colspan="3">${program[i][10]}</td>
+            <td class="text-center" colspan="4">${program[i][13]}</td>
+            <td class="text-center">${program[i][12]}</td>
+        </tr>
+          <tr>
+            <td class="text-center " colspan="3">${program[i][14]}</td>
+            <td class="text-center" colspan="4">${program[i][15]}</td>
+            <td class="text-center">${program[i][11]}</td>
+        </tr>
+        <tr>
+            <td class="text-center" colspan="8">${program[i][16]}</td>            
+        </tr>
+        </tbody>
+</div>`).appendTo(".passtw");
+        } else if (program[i][4] === 2) {
+            if (program[i][2].trim().length === 1) {
+
+
+                $(`<div class="wds"><h5>${i} ${program[i][1]} ${program[i][2]}</h5>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center">OP Code</th>
+            <th scope="col" class="text-center">REG 1</th>
+            <th scope="col" class="text-center">REG 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td class="text-center">${program[i][7]}</td>
+        <td class="text-center">${reg[1][reg[0].indexOf(program[i][2].trim())]}</td>
+            <td class="text-center">N/A</td>
+        </tr>
+        <tr><td class="text-center" colspan="3">${program[i][16]}</td></tr>
+        </tbody>
+</div>`).appendTo(".passtw");
+            } else if (program[i][2].trim().length === 3) {
+                $(`<div class="wds"><h5>${i} ${program[i][1]} ${program[i][2]}</h5>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col" class="text-center">OP Code</th>
+            <th scope="col" class="text-center">REG 1</th>
+            <th scope="col" class="text-center">REG 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td class="text-center">${program[i][7]}</td>
+        <td  class="text-center">${reg[1][reg[0].indexOf(program[i][2][0].trim())]}</td>
+            <td  class="text-center">${reg[1][reg[0].indexOf(program[i][2][2].trim())]}</td>
+        </tr>
+        <tr><td class="text-center" colspan="3">${program[i][16]}</td></tr>
+        </tbody>
+</div>`).appendTo(".passtw");
+            }
+
         }
 }
 
@@ -681,6 +744,12 @@ calculateAddresses.addEventListener('click', e => {
     ob.removeAttribute("disabled");
     calculateAddresses.setAttribute("disabled", "");
     readFile.setAttribute("disabled", "");
+
+
+});
+
+ob.addEventListener('click', e => {
+
     addSymbolAddress(programStatement);
     NIFlags(programStatement);
     addInstructions(programStatement);
@@ -692,23 +761,16 @@ calculateAddresses.addEventListener('click', e => {
     flagsConcat(programStatement);
     fromSeparatedBinaryToHex(programStatement);
     obCode(programStatement);
-    console.log(HTME(programStatement));
-
-    console.log(programStatement);
-});
-
-ob.addEventListener('click', e => {
-
-
+    printPassTwo(programStatement)
     $(".ob").attr("disabled", "");
 
     $(".hte").removeAttr("disabled");
-
+    console.log(programStatement)
 
 });
 
 $(".hte").click(() => {
-    /*let hte = HTE(programStatement);
+    let hte = HTME(programStatement);
     $(".assmb").append(`<div class="row"><div class="col-12"><div class="htect"></div></div></div>`)
     for (let i = 0; i < hte.length; i++) {
         hte[i].forEach(e => {
@@ -718,5 +780,5 @@ $(".hte").click(() => {
         $(".htect").append(`<br>`)
 
     }
-    $(".hte").attr("disabled", "")*/
+    $(".hte").attr("disabled", "")
 });

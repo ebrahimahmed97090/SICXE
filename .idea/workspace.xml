@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dbbe446d-66ef-4992-bdeb-cb8fcae8ac45" name="Default Changelist" comment="" />
+    <list default="true" id="dbbe446d-66ef-4992-bdeb-cb8fcae8ac45" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/rebuild.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/rebuild.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,6 +127,8 @@
       <workItem from="1582731174656" duration="5249000" />
       <workItem from="1582744212311" duration="25045000" />
       <workItem from="1582809265958" duration="4992000" />
+      <workItem from="1582888249488" duration="3982000" />
+      <workItem from="1582905301518" duration="1671000" />
     </task>
     <servers />
   </component>
@@ -159,20 +165,21 @@
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1579259468262" />
     <state x="184" y="6" key="SettingsEditor/0.0.1366.736@0.0.1366.736" timestamp="1581759360123" />
-    <state x="384" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1582809266064">
+    <state x="384" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1582905303782">
       <screen x="0" y="0" width="1366" height="736" />
     </state>
     <state x="382" y="191" key="com.intellij.ide.util.TipDialog/0.0.1360.736@0.0.1360.736" timestamp="1581846967430" />
     <state x="384" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1582667043106" />
-    <state x="384" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.736@0.0.1366.736" timestamp="1582809266064" />
+    <state x="384" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.736@0.0.1366.736" timestamp="1582905303782" />
     <state x="380" y="0" width="606" height="728" key="find.popup" timestamp="1575337432192">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="380" y="0" width="606" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1575337432192" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1579105058102">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="339" y="164" key="run.anything.popup" timestamp="1582906512594">
+      <screen x="0" y="0" width="1366" height="736" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1579105058102" />
+    <state x="339" y="164" key="run.anything.popup/0.0.1366.736@0.0.1366.736" timestamp="1582906512594" />
     <state x="346" y="50" width="672" height="686" key="search.everywhere.popup" timestamp="1582810100830">
       <screen x="0" y="0" width="1366" height="736" />
     </state>
